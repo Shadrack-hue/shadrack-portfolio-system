@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Eng. Shadrack Favour — Engineering Intelligence</title>
+  <meta name="description" content="Eng. Shadrack Favour — Electrical Engineer evolving into an AI-driven technology innovator." />
+  <style>
+    /* -------------------------
+       Design tokens & base
+       ------------------------- */
+    :root{
+      --bg:#05060A;
+      --glass: rgba(255,255,255,0.04);
+      --neon: #00C2FF;
+      --cyan: #00F0D9;
+      --purple: #2B0B5A;
+      --green: #7CFFB2;
+      --soft-text: #D6E6FF;
+      --muted: #9FB0D9;
+      --card-bg: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      --glass-border: rgba(255,255,255,0.03);
+      --max-width: 1200px;
+      --radius: 14px;
+      --glass-blur: 10px;
+    }
+
+    html,body,#root { height: 100%; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(43,11,90,0.25), transparent),
+                  radial-gradient(900px 400px at 90% 90%, rgba(0,240,217,0.06), transparent),
+                  var(--bg);
+      color: var(--soft-text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 28px;
+    }
+
+    /* -------------------------
+       Glass & neon utilities
+       ------------------------- */
+    .glass {
+      background: var(--card-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(var(--glass-blur));
+      border-radius: var(--radius);
+    }
+
+    .neon-text {
+      color: var(--soft-text);
+      text-shadow: 0 6px 30px rgba(0,194,255,0.08);
+    }
+
+    .btn-neon {
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      background: linear-gradient(90deg,var(--neon),var(--cyan));
+      color:#021018;
+      padding:10px 16px;
+      border-radius:10px;
+      font-weight:600;
+      box-shadow: 0 10px 30px rgba(0,194,255,0.12);
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-ghost {
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      background: transparent;
+      color: var(--soft-text);
+      padding:10px 14px;
+      border-radius:10px;
+      border: 1px solid rgba(255,255,255,0.04);
+      cursor: pointer;
+    }
+
+    .glass-chip {
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.03);
+      color: var(--muted);
+      font-size:13px;
+    }
+
+    /* -------------------------
+       Header
+       ------------------------- */
+    header {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 18px;
+      z-index: 60;
+      display:flex;
+      justify-content:center;
+      pointer-events: none;
+    }
+    .nav {
+      width: calc(100% - 56px);
+      max-width: var(--max-width);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:10px;
+      pointer-events: auto;
+    }
+    .brand {
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .logo {
+      width:44px;
+      height:44px;
+      border-radius:10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:800;
+      background: linear-gradient(135deg,var(--neon),var(--cyan));
+      color:#021018;
+      box-shadow: 0 8px 30px rgba(0,194,255,0.12);
+    }
+    .nav-links { display:flex; gap:18px; align-items:center; color:var(--muted); font-size:14px; }
+    .nav-right { display:flex; gap:10px; align-items:center; }
+
+    /* -------------------------
+       Hero
+       ------------------------- */
+    .hero {
+      min-height: 88vh;
+      display:flex;
+      align-items:center;
+      padding-top: 80px;
+      padding-bottom: 40px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-grid {
+      display:grid;
+      grid-template-columns: 1fr 480px;
+      gap: 36px;
+      align-items:center;
+      width:100%;
+    }
+    .hero-left h1 {
+      margin:0;
+      font-weight:800;
+      font-size: clamp(28px, 5vw, 56px);
+      line-height: 1.02;
+    }
+    .hero-left p { color: #9FB0D9; margin-top:12px; max-width: 60ch; }
+
+    .hero-cta { margin-top:18px; display:flex; gap:12px; flex-wrap:wrap; }
+
+    .orb-card {
+      width:100%;
+      height:420px;
+      border-radius:18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .orb-placeholder {
+      width:220px;
+      height:220px;
+      border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.06), transparent 30%),
+                  linear-gradient(135deg,var(--neon),var(--cyan));
+      box-shadow: 0 20px 60px rgba(0,194,255,0.12);
+      transform: translateZ(0);
+      animation: orb-breathe 3.6s ease-in-out infinite;
+    }
+    @keyframes orb-breathe {
+      0% { transform: scale(1) translateY(0); filter: blur(0px); }
+      50% { transform: scale(1.04) translateY(-6px); filter: blur(0.6px); }
+      100% { transform: scale(1) translateY(0); filter: blur(0px); }
+    }
+
+    /* -------------------------
+       Sections
+       ------------------------- */
+    section { padding: 48px 0; }
+    h2.section-title { font-size:20px; margin:0 0 8px 0; font-weight:700; color:var(--soft-text); }
+    p.lead { color:#9fb0d9; margin:0 0 18px 0; line-height: 1.6; }
+
+    .two-col { display:grid; grid-template-columns: 360px 1fr; gap:36px; align-items:start; }
+    .portrait {
+      width:100%;
+      height:320px;
+      border-radius:14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border: 1px solid var(--glass-border);
+      color: var(--muted);
+    }
+
+    /* -------------------------
+       Projects grid
+       ------------------------- */
+    .projects-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap:18px;
+    }
+    .project-card {
+      padding:14px;
+      border-radius:12px;
+      overflow:hidden;
+      transition: transform .28s ease, box-shadow .28s ease;
+      cursor: pointer;
+    }
+    .project-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0,194,255,0.06); border: 1px solid rgba(0,194,255,0.06); }
+    .project-preview {
+      height:160px;
+      border-radius:10px;
+      background: linear-gradient(135deg, rgba(43,11,90,0.6), rgba(5,6,10,0.6));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#cfefff;
+      font-weight:600;
+      margin-bottom:10px;
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+    .project-card h3 { margin: 8px 0 4px 0; font-size: 16px; }
+    .project-card p { font-size: 14px; color: var(--muted); margin: 0; line-height: 1.4; }
+    .stack-tags { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+
+    /* -------------------------
+       Blog grid
+       ------------------------- */
+    .blog-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:18px; }
+    .blog-card { padding: 18px; transition: background 0.3s ease; }
+    .blog-card:hover { background: rgba(255,255,255,0.06); }
+    .blog-card .date { font-size: 12px; color: var(--neon); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: block; }
+    .blog-card h3 { margin: 0 0 10px 0; font-size: 18px; }
+
+    /* -------------------------
+       Skills
+       ------------------------- */
+    .skills-wrapper { display: flex; flex-direction: column; gap: 10px; }
+    .skill-row { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 16px; border-radius:10px; }
+    .skill-name { font-weight: 500; min-width: 150px; }
+    .skill-bar { height:8px; background: rgba(255,255,255,0.04); border-radius:999px; overflow:hidden; flex-grow: 1; max-width: 300px; }
+    .skill-fill { height:100%; background: linear-gradient(90deg,var(--neon),var(--cyan)); border-radius:999px; width:0%; transition: width 1.2s cubic-bezier(.2,.9,.2,1); }
+    .skill-pct { font-size: 13px; color: var(--muted); width: 40px; text-align: right; }
+
+    /* -------------------------
+       Timeline & counters
+       ------------------------- */
+    .timeline { display:flex; flex-direction:column; gap:12px; position: relative; padding-left: 20px; border-left: 2px solid rgba(255,255,255,0.05); }
+    .timeline-item { position: relative; padding-bottom: 16px; }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -26px;
+      top: 4px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--neon);
+      box-shadow: 0 0 10px var(--neon);
+    }
+    .timeline-item h4 { margin: 0 0 4px 0; font-size: 16px; color: var(--soft-text); }
+    .timeline-item .time { font-size: 13px; color: var(--cyan); margin-bottom: 6px; display: block; }
+    .timeline-item p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.5; }
+
+    .counters { display:flex; gap:18px; flex-wrap:wrap; margin-top:24px; }
+    .counter { padding:16px; border-radius:10px; min-width:120px; text-align:center; flex: 1; }
+    .counter h3 { margin: 0 0 4px 0; font-size: 28px; color: var(--neon); }
+    .counter p { margin: 0; font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* -------------------------
+       Contact
+       ------------------------- */
+    .contact-grid { display:grid; grid-template-columns: 1fr 360px; gap:36px; align-items:start; }
+    .form-field { display:flex; flex-direction:column; gap:6px; margin-bottom:16px; }
+    .form-field label { font-size: 13px; color: var(--muted); margin-left: 4px; }
+    input, textarea {
+      background: rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding:12px 14px;
+      border-radius:10px;
+      color:var(--soft-text);
+      outline: none;
+      font-family: inherit;
+      transition: border 0.3s ease;
+    }
+    input:focus, textarea:focus { border-color: var(--neon); }
+    input::placeholder, textarea::placeholder { color: #5a6b8a; }
+
+    /* -------------------------
+       Floating orb & toast
+       ------------------------- */
+    .floating-orb { position: fixed; right: 22px; bottom: 22px; z-index: 80; display:flex; flex-direction: column; gap:12px; align-items:flex-end; }
+    .orb-btn { width:56px; height:56px; border-radius:999px; display:flex; align-items:center; justify-content:center; background: linear-gradient(135deg,var(--neon),var(--cyan)); box-shadow: 0 10px 30px rgba(0,194,255,0.2); cursor:pointer; border:none; font-size: 24px; transition: transform 0.2s ease; }
+    .orb-btn:hover { transform: scale(1.05); }
+    .orb-panel { width:300px; padding:16px; border-radius:12px; display: none; flex-direction: column; gap: 10px; font-size: 14px; transform-origin: bottom right; }
+    .orb-panel.active { display: flex; animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(10px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .toast {
+      position: fixed;
+      right: 22px;
+      bottom: 90px;
+      z-index: 90;
+      padding:12px 16px;
+      border-radius:10px;
+      background: linear-gradient(90deg, rgba(124,255,178,0.08), rgba(0,240,217,0.04));
+      border: 1px solid rgba(124,255,178,0.12);
+      color: var(--green);
+      display:none;
+      font-size: 14px;
+      align-items: center;
+      gap: 8px;
+    }
+    .toast.show { display: flex; animation: slideInRight 0.3s ease; }
+
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* -------------------------
+       Footer
+       ------------------------- */
+    footer { padding:28px 0; text-align:center; color:#5a6b8a; font-size: 14px; border-top: 1px solid var(--glass-border); margin-top: 48px; }
+
+    /* Background Canvas */
+    #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+
+    /* -------------------------
+       Responsive
+       ------------------------- */
+    @media (max-width: 980px) {
+      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .hero-left p { margin: 12px auto; }
+      .hero-cta { justify-content: center; }
+      .two-col { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .nav-links { display:none; }
+      .orb-panel { display:none !important; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bg-canvas"></canvas>
+  <div id="root"></div>
+
+  <script>
+    // ---------- Utilities ----------
+    function el(tag, attrs = {}, ...children) {
+      const node = document.createElement(tag);
+      for (const k in attrs) {
+        if (k === 'class') node.className = attrs[k];
+        else if (k === 'html') node.innerHTML = attrs[k];
+        else if (k.startsWith('on') && typeof attrs[k] === 'function') node.addEventListener(k.slice(2).toLowerCase(), attrs[k]);
+        else node.setAttribute(k, attrs[k]);
+      }
+      children.flat().forEach(c => {
+        if (c == null) return;
+        node.append(typeof c === 'string' ? document.createTextNode(c) : c);
+      });
+      return node;
+    }
+
+    // ---------- Data ----------
+    const PROJECTS = [
+      { id: 'ai-systems', title: 'AI-Powered Engineering Systems', summary: 'End-to-end system integrating sensor networks, ML inference, and adaptive control mechanisms.', tags: ['Python', 'TensorFlow', 'IoT', 'C++'] },
+      { id: 'smart-grid', title: 'Smart Grid Analytics Model', summary: 'Predictive maintenance framework for electrical substations reducing downtime by 30%.', tags: ['PyTorch', 'Power Systems', 'Data Science'] },
+      { id: 'drone-diagnostics', title: 'Autonomous Drone Diagnostics', summary: 'Computer vision pipeline for automated inspection of high-voltage transmission lines.', tags: ['OpenCV', 'Robotics', 'Edge AI'] }
+    ];
+
+    const SKILLS = [
+      { name: 'Electrical Systems Design', val: 92 },
+      { name: 'Machine Learning & AI', val: 85 },
+      { name: 'IoT & Sensor Networks', val: 88 },
+      { name: 'Python / C++ / Embedded', val: 90 },
+      { name: 'Data Structures & Algorithms', val: 80 }
+    ];
+
+    const TIMELINE = [
+      { year: '2025 - Present', title: 'Lead AI Engineer', desc: 'Pioneering edge-computing solutions for sustainable energy infrastructure.' },
+      { year: '2023 - 2025', title: 'Systems Integration Specialist', desc: 'Bridged hardware systems with cloud-based predictive analytics.' },
+      { year: '2022', title: 'BSc Electrical Engineering', desc: 'Graduated with honors. Thesis on smart grids and renewable load balancing.' }
+    ];
+
+    const BLOGS = [
+      { date: 'Oct 12, 2025', title: 'The Convergence of AI & Electrical Engineering', excerpt: 'How neural networks are reshaping traditional power distribution...' },
+      { date: 'Aug 24, 2025', title: 'Deploying Edge AI on Microcontrollers', excerpt: 'A practical guide to running TensorFlow Lite on embedded systems.' }
+    ];
+
+    // ---------- Components ----------
+
+    const Header = () => el('header', {},
+      el('nav', {class: 'nav glass'},
+        el('div', {class: 'brand'},
+          el('div', {class: 'logo'}, 'SF'),
+          el('span', {class: 'neon-text', style: 'font-weight:600; font-size:15px;'}, 'Eng. Shadrack Favour')
+        ),
+        el('div', {class: 'nav-links'},
+          el('a', {href: '#about'}, 'About'),
+          el('a', {href: '#projects'}, 'Projects'),
+          el('a', {href: '#blog'}, 'Blog'),
+          el('a', {href: 'intelstream.html', target: '_self', style: 'color: #00F0D9; font-weight: 600; text-shadow: 0 0 10px rgba(0,240,217,0.3);'}, '✦ IntelStream AI')
+        ),
+        el('div', {class: 'nav-right'},
+          el('a', {href: '#contact', class: 'btn-ghost'}, 'Contact')
+        )
+      )
+    );
+
+    const Hero = () => el('section', {class: 'hero container'},
+      el('div', {class: 'hero-grid'},
+        el('div', {class: 'hero-left'},
+          el('h1', {class: 'neon-text'}, 'Engineering Intelligence.'),
+          el('p', {}, 'Bridging the physical world of Electrical Engineering with the boundless potential of Artificial Intelligence. Building systems that learn, adapt, and scale.'),
+          el('div', {class: 'hero-cta'},
+            el('a', {href: '#projects', class: 'btn-neon'}, 'View Work'),
+            el('a', {href: 'intelstream.html', target: '_self', class: 'btn-neon', style: 'background: linear-gradient(90deg, #60a5fa, #8b5cf6); color: #fff; box-shadow: 0 10px 30px rgba(139, 92, 246, 0.2);'}, '✦ Launch IntelStream AI'),
+            el('a', {href: '#about', class: 'btn-ghost'}, 'My Journey')
+          ),
+          el('div', {class: 'counters'},
+            el('div', {class: 'counter glass'}, el('h3', {}, '5+'), el('p', {}, 'Years Exp')),
+            el('div', {class: 'counter glass'}, el('h3', {}, '20+'), el('p', {}, 'Projects')),
+            el('div', {class: 'counter glass'}, el('h3', {}, '3'), el('p', {}, 'Patents'))
+          )
+        ),
+        el('div', {class: 'hero-right'},
+          el('div', {class: 'orb-card glass'},
+            el('div', {class: 'orb-placeholder'})
+          )
+        )
+      )
+    );
+
+    const AboutAndSkills = () => el('section', {id: 'about', class: 'container'},
+      el('h2', {class: 'section-title'}, 'System Architecture & Capabilities'),
+      el('p', {class: 'lead'}, 'I synthesize complex hardware and software ecosystems.'),
+      el('div', {class: 'two-col'},
+        el('div', {class: 'portrait'}, 'Visual Reference Placeholder'),
+        el('div', {class: 'skills-wrapper'},
+          ...SKILLS.map((s, i) => el('div', {class: 'skill-row glass'},
+            el('div', {class: 'skill-name'}, s.name),
+            el('div', {class: 'skill-bar'},
+              el('div', {class: 'skill-fill', id: `skill-fill-${i}`, 'data-val': s.val})
+            ),
+            el('div', {class: 'skill-pct'}, `${s.val}%`)
+          ))
+        )
+      )
+    );
+
+    const ProjectCard = (p) => el('div', {class: 'project-card glass'},
+      el('div', {class: 'project-preview'}, p.id.toUpperCase()),
+      el('h3', {class: 'neon-text'}, p.title),
+      el('p', {}, p.summary),
+      el('div', {class: 'stack-tags'},
+        ...p.tags.map(t => el('span', {class: 'glass-chip'}, t))
+      )
+    );
+
+    const ProjectsSection = () => el('section', {id: 'projects', class: 'container'},
+      el('h2', {class: 'section-title'}, 'Selected Works'),
+      el('p', {class: 'lead'}, 'A collection of systems combining AI, hardware, and data.'),
+      el('div', {class: 'projects-grid'}, ...PROJECTS.map(ProjectCard))
+    );
+
+    const TimelineSection = () => el('section', {id: 'timeline', class: 'container'},
+      el('h2', {class: 'section-title'}, 'Trajectory'),
+      el('p', {class: 'lead'}, 'Evolution from classical engineering to AI architecture.'),
+      el('div', {class: 'timeline'},
+        ...TIMELINE.map(t => el('div', {class: 'timeline-item'},
+          el('span', {class: 'time'}, t.year),
+          el('h4', {}, t.title),
+          el('p', {}, t.desc)
+        ))
+      )
+    );
+
+    const BlogSection = () => el('section', {id: 'blog', class: 'container'},
+      el('h2', {class: 'section-title'}, 'Engineering Logs'),
+      el('p', {class: 'lead'}, 'Thoughts on the intersection of electrons and algorithms.'),
+      el('div', {class: 'blog-grid'},
+        ...BLOGS.map(b => el('div', {class: 'blog-card glass'},
+          el('span', {class: 'date'}, b.date),
+          el('h3', {class: 'neon-text'}, b.title),
+          el('p', {style: 'color: var(--muted); font-size: 14px; line-height: 1.5; margin:0;'}, b.excerpt)
+        ))
+      )
+    );
+
+    const ContactSection = () => {
+      const showToast = (e) => {
+        e.preventDefault();
+        const toast = document.getElementById('success-toast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+        e.target.reset();
+      };
+
+      return el('section', {id: 'contact', class: 'container'},
+        el('h2', {class: 'section-title'}, 'Initialize Connection'),
+        el('p', {class: 'lead'}, 'Open for collaborations, consulting, or technical discussions.'),
+        el('div', {class: 'contact-grid'},
+          el('form', {class: 'glass', style: 'padding: 24px;', onsubmit: showToast},
+            el('div', {class: 'form-field'},
+              el('label', {}, 'Network ID (Name)'),
+              el('input', {type: 'text', placeholder: 'Enter your name', required: true})
+            ),
+            el('div', {class: 'form-field'},
+              el('label', {}, 'Protocol (Email)'),
+              el('input', {type: 'email', placeholder: 'Enter your email', required: true})
+            ),
+            el('div', {class: 'form-field'},
+              el('label', {}, 'Payload (Message)'),
+              el('textarea', {rows: '4', placeholder: 'Enter your message', required: true})
+            ),
+            el('button', {type: 'submit', class: 'btn-neon', style: 'width: 100%; justify-content:center; margin-top: 8px;'}, 'Transmit Data')
+          ),
+          el('div', {class: 'contact-info', style: 'display:flex; flex-direction:column; gap: 16px;'},
+            el('div', {class: 'glass', style: 'padding: 16px;'}, el('h4', {style:'margin:0 0 4px 0; color:var(--neon);'}, 'Location'), el('p', {style:'margin:0; font-size:14px; color:var(--muted);'}, 'Nairobi, Kenya / Global Remote')),
+            el('div', {class: 'glass', style: 'padding: 16px;'}, el('h4', {style:'margin:0 0 4px 0; color:var(--neon);'}, 'Email'), el('p', {style:'margin:0; font-size:14px; color:var(--muted);'}, 'hello@shadrackfavour.com')),
+            el('div', {class: 'glass', style: 'padding: 16px;'}, el('h4', {style:'margin:0 0 4px 0; color:var(--neon);'}, 'Social Grid'), 
+              el('div', {style: 'display:flex; gap: 10px; margin-top: 8px;'},
+                el('span', {class: 'glass-chip'}, 'LinkedIn'), el('span', {class: 'glass-chip'}, 'GitHub'), el('span', {class: 'glass-chip'}, 'X')
+              )
+            )
+          )
+        )
+      );
+    };
+
+    const FloatingOrbAndToast = () => {
+      const togglePanel = () => document.getElementById('orb-panel').classList.toggle('active');
+      return el('div', {},
+        el('div', {class: 'floating-orb'},
+          el('div', {id: 'orb-panel', class: 'orb-panel glass'},
+            el('strong', {style: 'color: var(--neon)'}, 'AI Assistant (Beta)'),
+            el('p', {style: 'margin:0; color: var(--muted);'}, 'Hello! I am an AI representation of Eng. Shadrack. How can I assist you today?'),
+            el('input', {type: 'text', placeholder: 'Ask me anything...', style: 'margin-top: 8px; padding: 8px; font-size: 13px;'})
+          ),
+          el('button', {class: 'orb-btn', onclick: togglePanel}, '✦')
+        ),
+        el('div', {id: 'success-toast', class: 'toast'}, '✓ Transmission Successful')
+      );
+    };
+
+    const Footer = () => el('footer', {}, `© ${new Date().getFullYear()} Eng. Shadrack Favour. All systems nominal.`);
+
+    // ---------- App Initialization ----------
+    const root = document.getElementById('root');
+    root.append(
+      Header(),
+      Hero(),
+      AboutAndSkills(),
+      ProjectsSection(),
+      TimelineSection(),
+      BlogSection(),
+      ContactSection(),
+      Footer(),
+      FloatingOrbAndToast()
+    );
+
+    // ---------- Animations & Effects ----------
+    setTimeout(() => {
+      SKILLS.forEach((s, i) => {
+        const bar = document.getElementById(`skill-fill-${i}`);
+        if(bar) bar.style.width = `${s.val}%`;
+      });
+    }, 500);
+
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height, particles = [];
+
+    function initCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      particles = Array.from({length: 40}, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        size: Math.random() * 1.5 + 0.5
+      }));
+    }
+
+    function animateCanvas() {
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = 'rgba(0, 240, 217, 0.5)';
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      requestAnimationFrame(animateCanvas);
+    }
+
+    window.addEventListener('resize', initCanvas);
+    initCanvas();
+    animateCanvas();
+  </script>
+</body>
+</html>
