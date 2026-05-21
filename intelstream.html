@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IntelStream AI | Eng. Shadrack Favour</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: #050816;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .glass {
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .glow {
+      box-shadow: 0 0 30px rgba(59,130,246,0.35);
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg,#60a5fa,#8b5cf6,#06b6d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .loader {
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(255,255,255,0.2);
+      border-top-color: #60a5fa;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .card-hover {
+      transition: all .3s ease;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px rgba(59,130,246,0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="min-h-screen p-6 lg:p-10">
+
+    <!-- NAV -->
+    <nav class="flex justify-between items-center mb-12">
+      <div>
+        <h1 class="text-3xl font-extrabold gradient-text">IntelStream AI</h1>
+        <p class="text-gray-400 text-sm">Built by Eng. Shadrack Favour | AI & Electrical Engineering</p>
+      </div>
+
+      <div class="flex gap-3">
+        <!-- New Link Button Added Here -->
+        <a href="index.html" target="_self" class="px-5 py-2 rounded-xl glass hover:bg-white/10 transition flex items-center gap-2 text-blue-400 border border-blue-500/30 font-semibold">
+          ← Back to Portfolio
+        </a>
+
+        <button onclick="openAuth('login')"
+          class="px-5 py-2 rounded-xl glass hover:bg-white/10 transition hidden md:block">
+          Login
+        </button>
+
+        <button onclick="openAuth('signup')"
+          class="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 transition glow hidden md:block">
+          Get Started
+        </button>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="max-w-5xl mx-auto text-center mb-14">
+      <h2 class="text-5xl lg:text-7xl font-black leading-tight mb-6">
+        AI-Powered
+        <span class="gradient-text">Intelligence Search</span>
+      </h2>
+
+      <p class="text-gray-400 text-lg max-w-3xl mx-auto leading-relaxed">
+        Aggregate web intelligence, news, social signals, geo-context and AI-ranked results in one ultra-fast platform engineered by Eng. Shadrack Favour.
+      </p>
+    </section>
+
+    <!-- SEARCH -->
+    <section class="max-w-6xl mx-auto mb-10">
+      <div class="glass rounded-3xl p-6 lg:p-8 glow">
+
+        <div class="grid lg:grid-cols-4 gap-4">
+          <input
+            id="query"
+            type="text"
+            placeholder="Search intelligence..."
+            class="lg:col-span-2 p-4 rounded-2xl bg-black/30 border border-white/10 outline-none"
+          />
+
+          <input
+            id="location"
+            type="text"
+            placeholder="Location (optional)"
+            class="p-4 rounded-2xl bg-black/30 border border-white/10 outline-none"
+          />
+
+          <button
+            onclick="runSearch()"
+            class="bg-blue-600 hover:bg-blue-500 rounded-2xl font-bold text-lg transition glow">
+            Analyze
+          </button>
+        </div>
+
+        <div class="flex flex-wrap gap-3 mt-6">
+          <div class="glass px-4 py-2 rounded-xl text-sm">AI Ranking</div>
+          <div class="glass px-4 py-2 rounded-xl text-sm">News Intelligence</div>
+          <div class="glass px-4 py-2 rounded-xl text-sm">Social Signals</div>
+          <div class="glass px-4 py-2 rounded-xl text-sm">Geo Context</div>
+          <div class="glass px-4 py-2 rounded-xl text-sm">Image Extraction</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="max-w-6xl mx-auto grid md:grid-cols-3 gap-5 mb-12">
+      <div class="glass rounded-3xl p-6 card-hover">
+        <h3 class="text-4xl font-black mb-2">24/7</h3>
+        <p class="text-gray-400">Real-time intelligence collection</p>
+      </div>
+
+      <div class="glass rounded-3xl p-6 card-hover">
+        <h3 class="text-4xl font-black mb-2">AI</h3>
+        <p class="text-gray-400">Semantic ranking engine</p>
+      </div>
+
+      <div class="glass rounded-3xl p-6 card-hover">
+        <h3 class="text-4xl font-black mb-2">Global</h3>
+        <p class="text-gray-400">Location-aware intelligence mapping</p>
+      </div>
+    </section>
+
+    <!-- FOUNDER -->
+    <section class="max-w-6xl mx-auto mb-14">
+      <div class="glass rounded-3xl p-8 lg:p-10 card-hover">
+        <div class="grid lg:grid-cols-2 gap-8 items-center">
+
+          <div>
+            <h2 class="text-4xl font-black mb-4 gradient-text">
+              About the Founder
+            </h2>
+
+            <p class="text-gray-300 leading-relaxed text-lg mb-6">
+              Eng. Shadrack Favour is an Electrical Engineer and AI Systems Builder focused on developing intelligent digital infrastructures, scalable SaaS products, and real-time data intelligence systems.
+            </p>
+
+            <div class="space-y-3 text-gray-300">
+              <p><strong>Email:</strong> shadracfavour44@gmail.com</p>
+              <p><strong>Phone:</strong> +254 741 443 643</p>
+              <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/shadrack-favour-80b284289" target="_blank" class="text-blue-400 hover:underline">www.linkedin.com/in/shadrack-favour-80b284289</a></p>
+            </div>
+          </div>
+
+          <div class="glass rounded-3xl p-8 border border-white/10">
+            <h3 class="text-2xl font-bold mb-6">Core Expertise</h3>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div class="bg-black/30 p-4 rounded-2xl">AI Engineering</div>
+              <div class="bg-black/30 p-4 rounded-2xl">FastAPI Systems</div>
+              <div class="bg-black/30 p-4 rounded-2xl">Automation</div>
+              <div class="bg-black/30 p-4 rounded-2xl">MongoDB Atlas</div>
+              <div class="bg-black/30 p-4 rounded-2xl">Electrical Engineering</div>
+              <div class="bg-black/30 p-4 rounded-2xl">SaaS Architecture</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- LOADER -->
+    <div id="loader" class="hidden justify-center my-10">
+      <div class="loader"></div>
+    </div>
+
+    <!-- RESULTS -->
+    <section class="max-w-7xl mx-auto">
+      <div id="results" class="grid md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+    </section>
+
+  </div>
+
+  <!-- AUTH MODAL -->
+  <div id="authModal"
+    class="hidden fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-5">
+
+    <div class="glass rounded-3xl p-8 w-full max-w-md relative glow">
+
+      <button onclick="closeAuth()"
+        class="absolute right-4 top-3 text-2xl text-gray-400 hover:text-white">
+        ×
+      </button>
+
+      <h2 id="authTitle" class="text-3xl font-black mb-6">Login</h2>
+
+      <div class="space-y-4">
+        <input
+          id="email"
+          type="email"
+          placeholder="Email"
+          class="w-full p-4 rounded-2xl bg-black/30 border border-white/10 outline-none"
+        />
+
+        <input
+          id="password"
+          type="password"
+          placeholder="Password"
+          class="w-full p-4 rounded-2xl bg-black/30 border border-white/10 outline-none"
+        />
+
+        <button
+          id="authButton"
+          onclick="handleAuth()"
+          class="w-full bg-blue-600 hover:bg-blue-500 p-4 rounded-2xl font-bold glow transition">
+          Continue
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    // ============================
+    // CONFIG
+    // ============================
+
+    // REPLACE WITH YOUR LIVE BACKEND URL
+    const API_BASE = "https://your-render-backend.onrender.com";
+
+    let authMode = "login";
+    let token = localStorage.getItem("token") || "";
+
+    // ============================
+    // AUTH UI
+    // ============================
+
+    function openAuth(mode) {
+      authMode = mode;
+      document.getElementById("authModal").classList.remove("hidden");
+      document.getElementById("authTitle").innerText = mode === "login"
+        ? "Login"
+        : "Create Account";
+    }
+
+    function closeAuth() {
+      document.getElementById("authModal").classList.add("hidden");
+    }
+
+    async function handleAuth() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      if (!email || !password) {
+        alert("Fill all fields");
+        return;
+      }
+
+      try {
+        const endpoint = authMode === "login"
+          ? "/login"
+          : "/signup";
+
+        const res = await fetch(`${API_BASE}${endpoint}?email=${email}&password=${password}`, {
+          method: "POST"
+        });
+
+        const data = await res.json();
+
+        if (authMode === "signup") {
+          alert("Account created. Please login.");
+          openAuth("login");
+          return;
+        }
+
+        if (data.token) {
+          token = data.token;
+          localStorage.setItem("token", token);
+          closeAuth();
+          alert("Login successful");
+        } else {
+          alert(data.error || "Authentication failed");
+        }
+
+      } catch (err) {
+        console.error(err);
+        alert("Server error");
+      }
+    }
+
+    // ============================
+    // SEARCH
+    // ============================
+
+    async function runSearch() {
+
+      if (!token) {
+        openAuth("login");
+        return;
+      }
+
+      const query = document.getElementById("query").value;
+      const location = document.getElementById("location").value;
+
+      if (!query) {
+        alert("Enter search query");
+        return;
+      }
+
+      document.getElementById("loader").classList.remove("hidden");
+      document.getElementById("results").innerHTML = "";
+
+      try {
+
+        const res = await fetch(`${API_BASE}/search`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+          body: JSON.stringify({ query, location })
+        });
+
+        const data = await res.json();
+
+        document.getElementById("loader").classList.add("hidden");
+
+        if (data.error) {
+          alert(data.error);
+          return;
+        }
+
+        renderResults(data);
+
+      } catch (err) {
+        console.error(err);
+        document.getElementById("loader").classList.add("hidden");
+        alert("Failed to fetch results");
+      }
+    }
+
+    // ============================
+    // RENDER RESULTS
+    // ============================
+
+    function renderResults(results) {
+
+      const container = document.getElementById("results");
+
+      if (!results.length) {
+        container.innerHTML = `
+          <div class="glass rounded-3xl p-10 text-center col-span-full">
+            <h2 class="text-2xl font-bold mb-3">No Results Found</h2>
+            <p class="text-gray-400">Try another intelligence query.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = results.map(r => `
+
+        <div class="glass rounded-3xl overflow-hidden card-hover">
+
+          ${r.images && r.images[0]
+            ? `<img src="${r.images[0]}" class="w-full h-56 object-cover">`
+            : `<div class="h-56 bg-gradient-to-br from-blue-600 to-purple-700 flex items-center justify-center text-6xl font-black">AI</div>`
+          }
+
+          <div class="p-6">
+
+            <div class="flex justify-between items-center mb-4">
+              <span class="text-xs uppercase tracking-widest text-blue-400 font-bold">
+                ${r.source || 'web'}
+              </span>
+
+              ${r.location
+                ? `<span class="text-xs text-gray-400">
+                    ${r.location.lat.toFixed(2)}, ${r.location.lon.toFixed(2)}
+                  </span>`
+                : ''
+              }
+            </div>
+
+            <h2 class="text-xl font-bold mb-4 leading-snug line-clamp-3">
+              ${r.title}
+            </h2>
+
+            <a
+              href="${r.link}"
+              target="_blank"
+              class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 px-5 py-3 rounded-xl font-semibold transition">
+              Open Source
+            </a>
+
+          </div>
+        </div>
+
+      `).join('');
+    }
+
+  </script>
+</body>
+</html>
