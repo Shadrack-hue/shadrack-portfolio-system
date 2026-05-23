@@ -294,77 +294,73 @@ fs-accent-500) 0%,
   );
 
 
+.fs-shadrack-submit {
+  margin-top: 2rem;
+  text-align: center;
+}
+
 .fs-shadrack-submit button {
-  appearance: none;
-  -webkit-appearance: none;
-  border: 0;
-
-background: linear-gradient(180deg, #3b82f6 0%, #1d4ed8 100%);
+  background: linear-gradient(135deg, #0f172a, #2563eb);
   color: #fff;
-  padding: 11px 18px;
-  border-radius: 10px;
-
-  font-size: 0.99rem;
-  font-weight: 800;
-  letter-spacing: 0.2px;
-
+  border: none;
+  padding: 14px 34px;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
   cursor: pointer;
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
 
-  box-shadow:
-    0 8px 20px rgba(11, 95, 255, 0.18),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+.fs-shadrack-submit button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.18);
+  transform: skewX(-25deg);
+  transition: 0.6s;
+}
 
-  transition:
-    transform 160ms cubic-bezier(.2,.9,.2,1),
-    box-shadow 180ms ease,
-    background 180ms ease,
-    opacity 120ms ease;
+.fs-shadrack-submit button:hover::before {
+  left: 120%;
 }
 
 .fs-shadrack-submit button:hover {
-  background: linear-gradient(
-    180deg,
-    var(--fs-accent) 0%,
-    var(--fs-accent-700) 100%
-  );
-
-  transform: translateY(-2px);
-
-  box-shadow:
-    0 12px 26px rgba(11, 95, 255, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 14px 32px rgba(37, 99, 235, 0.4);
+  background: linear-gradient(135deg, #1e293b, #3b82f6);
 }
 
 .fs-shadrack-submit button:active {
-  transform: translateY(0);
-
-  box-shadow:
-    0 5px 14px rgba(11, 95, 255, 0.18),
-    inset 0 2px 4px rgba(0, 0, 0, 0.12);
+  transform: scale(0.98);
 }
 
-.fs-shadrack-submit button:focus-visible {
-  outline: 3px solid rgba(11, 95, 255, 0.28);
-  outline-offset: 3px;
+.fs-shadrack-note {
+  margin-top: 0.85rem;
+  font-size: 0.92rem;
+  color: #64748b;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  animation: fadeUp 1s ease;
 }
-  /* Small note text */
-  .fs-shadrack-note { color: var(--fs-muted); font-size: 0.92rem; }
 
-  /* Responsive tweaks */
-  @media (max-width: 640px) {
-    #fs-shadrack-contact { padding: 16px; margin: 20px auto; }
-    .fs-shadrack-row { gap: 10px; }
-    .fs-shadrack-submit { justify-content: space-between; }
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
   }
-
-  /* Dark mode support if site uses prefers-color-scheme */
-  @media (prefers-color-scheme: dark) {
-    :root { --fs-bg: #0b1220; --fs-border: #1f2937; --fs-text: #e6eef8; --fs-muted: #9aa6b2; --fs-shadow: 0 6px 18px rgba(2,6,23,0.6); }
-    .fs-shadrack-submit button { box-shadow: 0 8px 20px rgba(11,95,255,0.18); }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-</style>
-
-
+}
+  
   <h2 id="fs-shadrack-title"><strong>Contact</strong></h2>
 
   <form action="https://formspree.io/f/mqejbpgw" method="POST" class="fs-shadrack-form" novalidate>
