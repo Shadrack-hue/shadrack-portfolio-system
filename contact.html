@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact — Shadrack</title>
+  <style>
+    /* Minimal, non-invasive styles so it won't clash with your site */
+    .fs-form { max-width:640px; margin:32px auto; font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif; }
+    .fs-form label { display:block; margin:12px 0 6px; font-weight:600; }
+    .fs-form input, .fs-form textarea, .fs-form button { width:100%; box-sizing:border-box; padding:10px; border:1px solid #ddd; border-radius:6px; }
+    .fs-form button { margin-top:12px; background:#0b5fff; color:#fff; border:0; cursor:pointer; }
+  </style>
+</head>
+<body>
+  <main class="fs-form" role="main">
+    <h1>Contact</h1>
+
+    <form action="https://formspree.io/f/mqejbpgw" method="POST" novalidate>
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" required autocomplete="name">
+
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" required autocomplete="email">
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="6" required></textarea>
+
+      <!-- Honeypot to reduce spam -->
+      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+      <!-- Redirect to a local thank-you page after successful submit -->
+      <input type="hidden" name="_next" value="https://shadrackweb.netlify.app/thanks.html">
+
+      <button type="submit">Send</button>
+    </form>
+  </main>
+</body>
+</html>
