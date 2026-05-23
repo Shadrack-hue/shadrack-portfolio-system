@@ -210,20 +210,138 @@
 
 <!-- START: Formspree contact block (fs-shadrack) -->
 <section id="fs-shadrack-contact" aria-labelledby="fs-shadrack-title">
-  <style>
-    /* Scoped styles to avoid interfering with site styles */
-    #fs-shadrack-contact { max-width:720px; margin:28px auto; padding:18px; border-radius:10px; background:var(--fs-bg,#fff); box-shadow:0 1px 4px rgba(0,0,0,0.04); font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif; }
-    #fs-shadrack-contact h2 { margin:0 0 12px; font-size:1.25rem; color:var(--fs-heading,#111); }
-    .fs-shadrack-row { display:flex; gap:12px; flex-wrap:wrap; }
-    .fs-shadrack-field { flex:1 1 220px; min-width:180px; }
-    .fs-shadrack-field label { display:block; font-weight:600; margin-bottom:6px; font-size:0.95rem; color:var(--fs-label,#222); }
-    .fs-shadrack-field input, .fs-shadrack-field textarea { width:100%; padding:10px; border:1px solid #e3e6ea; border-radius:8px; font-size:0.95rem; background:transparent; color:inherit; box-sizing:border-box; }
-    .fs-shadrack-field textarea { resize:vertical; min-height:120px; }
-    .fs-shadrack-submit { margin-top:12px; display:flex; gap:10px; align-items:center; }
-    .fs-shadrack-submit button { background:#0b5fff; color:#fff; border:0; padding:10px 14px; border-radius:8px; cursor:pointer; font-weight:600; }
-    .fs-shadrack-note { font-size:0.9rem; color:#555; margin-left:8px; }
-    @media (prefers-reduced-motion: reduce) { .fs-shadrack-field input, .fs-shadrack-field textarea, .fs-shadrack-submit button { transition:none; } }
-  </style>
+<style>
+  /* Scoped Formspree styles for #fs-shadrack-contact */
+  :root {
+    --fs-bg: #ffffff;
+    --fs-accent: #0b5fff;
+    --fs-accent-600: #084bd6;
+    --fs-border: #e6e9ee;
+    --fs-text: #111827;
+    --fs-muted: #6b7280;
+    --fs-radius: 10px;
+    --fs-shadow: 0 6px 18px rgba(11,95,255,0.06);
+  }
+
+  /* Container */
+  #fs-shadrack-contact {
+    max-width: 760px;
+    margin: 36px auto;
+    padding: 22px;
+    border-radius: var(--fs-radius);
+    background: var(--fs-bg);
+    box-shadow: var(--fs-shadow);
+    color: var(--fs-text);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    line-height: 1.45;
+  }
+
+  /* Heading */
+  #fs-shadrack-contact h2 {
+    margin: 0 0 14px;
+    font-size: 1.35rem;
+    letter-spacing: -0.01em;
+  }
+
+  /* Grid row */
+  .fs-shadrack-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .fs-shadrack-field {
+    flex: 1 1 240px;
+    min-width: 180px;
+  }
+
+  .fs-shadrack-field label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--fs-text);
+    font-size: 0.95rem;
+  }
+
+  /* Inputs and textarea */
+  .fs-shadrack-field input,
+  .fs-shadrack-field textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--fs-border);
+    border-radius: 8px;
+    background: transparent;
+    color: inherit;
+    font-size: 0.95rem;
+    transition: box-shadow 160ms ease, border-color 160ms ease, transform 120ms ease;
+    box-sizing: border-box;
+  }
+
+  .fs-shadrack-field textarea { min-height: 140px; resize: vertical; }
+
+  /* Focus states for accessibility */
+  .fs-shadrack-field input:focus,
+  .fs-shadrack-field textarea:focus {
+    outline: none;
+    border-color: var(--fs-accent);
+    box-shadow: 0 6px 18px rgba(11,95,255,0.08);
+    transform: translateY(-1px);
+  }
+
+  /* Submit area */
+  .fs-shadrack-submit {
+    margin-top: 14px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .fs-shadrack-submit button {
+    appearance: none;
+    -webkit-appearance: none;
+    border: 0;
+    background: linear-gradient(180deg, var(--fs-accent) 0%, var(--fs-accent-600) 100%);
+    color: #fff;
+    padding: 11px 18px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(11,95,255,0.12);
+    transition: transform 140ms cubic-bezier(.2,.9,.2,1), box-shadow 140ms ease, opacity 120ms ease;
+    font-size: 0.98rem;
+  }
+
+  /* Hover effect */
+  .fs-shadrack-submit button:hover {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 14px 30px rgba(11,95,255,0.14);
+  }
+
+  /* Active and focus-visible */
+  .fs-shadrack-submit button:active { transform: translateY(-1px) scale(0.995); }
+  .fs-shadrack-submit button:focus-visible {
+    outline: 3px solid rgba(11,95,255,0.14);
+    outline-offset: 3px;
+  }
+
+  /* Small note text */
+  .fs-shadrack-note { color: var(--fs-muted); font-size: 0.92rem; }
+
+  /* Responsive tweaks */
+  @media (max-width: 640px) {
+    #fs-shadrack-contact { padding: 16px; margin: 20px auto; }
+    .fs-shadrack-row { gap: 10px; }
+    .fs-shadrack-submit { justify-content: space-between; }
+  }
+
+  /* Dark mode support if site uses prefers-color-scheme */
+  @media (prefers-color-scheme: dark) {
+    :root { --fs-bg: #0b1220; --fs-border: #1f2937; --fs-text: #e6eef8; --fs-muted: #9aa6b2; --fs-shadow: 0 6px 18px rgba(2,6,23,0.6); }
+    .fs-shadrack-submit button { box-shadow: 0 8px 20px rgba(11,95,255,0.18); }
+  }
+</style>
+
 
   <h2 id="fs-shadrack-title">Contact</h2>
 
