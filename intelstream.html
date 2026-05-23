@@ -297,20 +297,64 @@
     flex-wrap: wrap;
   }
 
-  .fs-shadrack-submit button {
-    appearance: none;
-    -webkit-appearance: none;
-    border: 0;
-    background: linear-gradient(180deg, var(--fs-accent) 0%, var(--fs-accent-600) 100%);
-    color: #fff;
-    padding: 11px 18px;
-    border-radius: 10px;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 8px 20px rgba(11,95,255,0.12);
-    transition: transform 140ms cubic-bezier(.2,.9,.2,1), box-shadow 140ms ease, opacity 120ms ease;
-    font-size: 0.98rem;
-  }
+ .fs-shadrack-submit button {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+
+  background: linear-gradient(
+    180deg,
+    var(--fs-accent-500) 0%,
+    var(--fs-accent-700) 100%
+  );
+
+  color: #fff;
+  padding: 11px 18px;
+  border-radius: 10px;
+
+  font-size: 0.98rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 20px rgba(11, 95, 255, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+
+  transition:
+    transform 160ms cubic-bezier(.2,.9,.2,1),
+    box-shadow 180ms ease,
+    background 180ms ease,
+    opacity 120ms ease;
+}
+
+.fs-shadrack-submit button:hover {
+  background: linear-gradient(
+    180deg,
+    var(--fs-accent) 0%,
+    var(--fs-accent-700) 100%
+  );
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 26px rgba(11, 95, 255, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+.fs-shadrack-submit button:active {
+  transform: translateY(0);
+
+  box-shadow:
+    0 5px 14px rgba(11, 95, 255, 0.18),
+    inset 0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+.fs-shadrack-submit button:focus-visible {
+  outline: 3px solid rgba(11, 95, 255, 0.28);
+  outline-offset: 3px;
+}
 
   /* Hover effect */
   .fs-shadrack-submit button:hover {
@@ -343,12 +387,12 @@
 </style>
 
 
-  <h2 id="fs-shadrack-title">Contact</h2>
+  <h2 id="fs-shadrack-title"><strong>Contact</strong></h2>
 
   <form action="https://formspree.io/f/mqejbpgw" method="POST" class="fs-shadrack-form" novalidate>
     <div class="fs-shadrack-row">
       <div class="fs-shadrack-field">
-        <label for="fs-shadrack-name">Name</label>
+        <label for="fs-shadrack-name">Your Name</label>
         <input id="fs-shadrack-name" name="name" type="text" required autocomplete="name" />
       </div>
 
@@ -368,7 +412,7 @@
 
     <div class="fs-shadrack-submit">
       <button type="submit">Send message</button>
-      <div class="fs-shadrack-note">We’ll reply within 48 hours.</div>
+      <div class="fs-shadrack-note">We’ll reply within 24 hours.</div>
     </div>
   </form>
 </section>
