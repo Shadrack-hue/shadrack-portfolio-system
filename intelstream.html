@@ -289,34 +289,40 @@
   }
 
   /* Submit area */
-  .fs-shadrack-submit {
-    margin-top: 14px;
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    flex-wrap: wrap;
-  }
+fs-accent-500) 0%,
+    var(--fs-accent-700) 100%
+  );
 
- .fs-shadrack-submit button {
+
+.fs-shadrack-submit button {
   appearance: none;
   -webkit-appearance: none;
   border: 0;
 
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 170px;
+  min-height: 48px;
+
   background: linear-gradient(
     180deg,
-    var(--fs-accent-500) 0%,
-    var(--fs-accent-700) 100%
+    var(--fs-accent) 0%,
+    var(--fs-accent-600) 100%
   );
 
-  color: #fff;
+  color: #ffffff;
   padding: 11px 18px;
   border-radius: 10px;
 
   font-size: 0.98rem;
   font-weight: 700;
-  letter-spacing: 0.2px;
+  line-height: 1;
 
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
 
   box-shadow:
     0 8px 20px rgba(11, 95, 255, 0.18),
@@ -325,17 +331,10 @@
   transition:
     transform 160ms cubic-bezier(.2,.9,.2,1),
     box-shadow 180ms ease,
-    background 180ms ease,
-    opacity 120ms ease;
+    background 180ms ease;
 }
 
 .fs-shadrack-submit button:hover {
-  background: linear-gradient(
-    180deg,
-    var(--fs-accent) 0%,
-    var(--fs-accent-700) 100%
-  );
-
   transform: translateY(-2px);
 
   box-shadow:
@@ -345,29 +344,21 @@
 
 .fs-shadrack-submit button:active {
   transform: translateY(0);
-
-  box-shadow:
-    0 5px 14px rgba(11, 95, 255, 0.18),
-    inset 0 2px 4px rgba(0, 0, 0, 0.12);
 }
 
-.fs-shadrack-submit button:focus-visible {
-  outline: 3px solid rgba(11, 95, 255, 0.28);
-  outline-offset: 3px;
+/* Prevent white invisible loading state */
+.fs-shadrack-submit button:disabled {
+  opacity: 0.85;
+  color: #ffffff;
 }
 
-  /* Hover effect */
-  .fs-shadrack-submit button:hover {
-    transform: translateY(-3px) scale(1.01);
-    box-shadow: 0 14px 30px rgba(11,95,255,0.14);
-  }
-
-  /* Active and focus-visible */
-  .fs-shadrack-submit button:active { transform: translateY(-1px) scale(0.995); }
-  .fs-shadrack-submit button:focus-visible {
-    outline: 3px solid rgba(11,95,255,0.14);
-    outline-offset: 3px;
-  }
+/* Ensure button text/icon always visible */
+.fs-shadrack-submit button *,
+.fs-shadrack-submit button span,
+.fs-shadrack-submit button svg {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
 
   /* Small note text */
   .fs-shadrack-note { color: var(--fs-muted); font-size: 0.92rem; }
