@@ -208,41 +208,54 @@
 
   </div>
 
-  <!-- AUTH MODAL -->
-  <div id="authModal"
-    class="hidden fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-5">
+<!-- START: Formspree contact block (fs-shadrack) -->
+<section id="fs-shadrack-contact" aria-labelledby="fs-shadrack-title">
+  <style>
+    /* Scoped styles to avoid interfering with site styles */
+    #fs-shadrack-contact { max-width:720px; margin:28px auto; padding:18px; border-radius:10px; background:var(--fs-bg,#fff); box-shadow:0 1px 4px rgba(0,0,0,0.04); font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif; }
+    #fs-shadrack-contact h2 { margin:0 0 12px; font-size:1.25rem; color:var(--fs-heading,#111); }
+    .fs-shadrack-row { display:flex; gap:12px; flex-wrap:wrap; }
+    .fs-shadrack-field { flex:1 1 220px; min-width:180px; }
+    .fs-shadrack-field label { display:block; font-weight:600; margin-bottom:6px; font-size:0.95rem; color:var(--fs-label,#222); }
+    .fs-shadrack-field input, .fs-shadrack-field textarea { width:100%; padding:10px; border:1px solid #e3e6ea; border-radius:8px; font-size:0.95rem; background:transparent; color:inherit; box-sizing:border-box; }
+    .fs-shadrack-field textarea { resize:vertical; min-height:120px; }
+    .fs-shadrack-submit { margin-top:12px; display:flex; gap:10px; align-items:center; }
+    .fs-shadrack-submit button { background:#0b5fff; color:#fff; border:0; padding:10px 14px; border-radius:8px; cursor:pointer; font-weight:600; }
+    .fs-shadrack-note { font-size:0.9rem; color:#555; margin-left:8px; }
+    @media (prefers-reduced-motion: reduce) { .fs-shadrack-field input, .fs-shadrack-field textarea, .fs-shadrack-submit button { transition:none; } }
+  </style>
 
-    <div class="glass rounded-3xl p-8 w-full max-w-md relative glow">
+  <h2 id="fs-shadrack-title">Contact</h2>
 
-      <button onclick="closeAuth()"
-        class="absolute right-4 top-3 text-2xl text-gray-400 hover:text-white">
-        ×
-      </button>
-
-      <h2 id="authTitle" class="text-3xl font-black mb-6">Login</h2>
-
-      <div class="space-y-4">
-        <input
-          id="email"
-          type="email"
-          placeholder="Email"
-          class="w-full p-4 rounded-2xl bg-black/30 border border-white/10 outline-none"
-        />
-
-        <input
-          id="password"
-          type="password"
-          placeholder="Password"
-          class="w-full p-4 rounded-2xl bg-black/30 border border-white/10 outline-none"
-        />
-
-        <button
-          id="authButton"
-          onclick="handleAuth()"
-          class="w-full bg-blue-600 hover:bg-blue-500 p-4 rounded-2xl font-bold glow transition">
-          Continue
-        </button>
+  <form action="https://formspree.io/f/mqejbpgw" method="POST" class="fs-shadrack-form" novalidate>
+    <div class="fs-shadrack-row">
+      <div class="fs-shadrack-field">
+        <label for="fs-shadrack-name">Name</label>
+        <input id="fs-shadrack-name" name="name" type="text" required autocomplete="name" />
       </div>
+
+      <div class="fs-shadrack-field">
+        <label for="fs-shadrack-email">Email</label>
+        <input id="fs-shadrack-email" name="email" type="email" required autocomplete="email" />
+      </div>
+    </div>
+
+    <div class="fs-shadrack-field" style="margin-top:12px;">
+      <label for="fs-shadrack-message">Message</label>
+      <textarea id="fs-shadrack-message" name="message" rows="6" required></textarea>
+    </div>
+
+    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+    <input type="hidden" name="_next" value="https://shadrackweb.netlify.app/thanks.html">
+
+    <div class="fs-shadrack-submit">
+      <button type="submit">Send message</button>
+      <div class="fs-shadrack-note">We’ll reply within 48 hours.</div>
+    </div>
+  </form>
+</section>
+<!-- END: Formspree contact block (fs-shadrack) -->
+
     </div>
   </div>
 
