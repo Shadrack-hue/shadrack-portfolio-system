@@ -1,0 +1,18 @@
+{
+  "name": "shadrack-portfolio-system",
+  "version": "1.0.0",
+  "description": "Portfolio website for Eng. Shadrack Favour",
+  "type": "module",
+  "scripts": {
+    "build": "echo 'Static site - no build needed'"
+  },
+  "keywords": [
+    "portfolio",
+    "engineering"
+  ],
+  "author": "Shadrack Favour",
+  "license": "MIT",
+  "dependencies": {
+    "@vercel/speed-insights": "^1.0.0"
+  }
+}
