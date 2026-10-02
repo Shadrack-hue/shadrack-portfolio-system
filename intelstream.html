@@ -65,7 +65,10 @@
   <script>
     window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
   </script>
+  <script>window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };</script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
+  <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 
@@ -409,122 +412,16 @@ fs-accent-500) 0%,
 
   <script>
 
-    // ============================
-    // CONFIG
-    // ============================
-
-    // REPLACE WITH YOUR LIVE BACKEND URL
-    const API_BASE = "https://shadrack-portfolio-system.onrender.com/index.html";
-
-    let authMode = "login";
-    let token = localStorage.getItem("token") || "";
-
-    // ============================
-    // AUTH UI
-    // ============================
-
-    function openAuth(mode) {
-      authMode = mode;
-      document.getElementById("authModal").classList.remove("hidden");
-      document.getElementById("authTitle").innerText = mode === "login"
-        ? "Login"
-        : "Create Account";
+    // Authentication and search are unavailable until a verified service is connected.
+    // Do not collect credentials or send requests to the former placeholder backend.
+    function openAuth() {
+      alert("Sign-in is unavailable while the account service is being configured.");
     }
-
-    function closeAuth() {
-      document.getElementById("authModal").classList.add("hidden");
-    }
-
-    async function handleAuth() {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-
-      if (!email || !password) {
-        alert("Fill all fields");
-        return;
-      }
-
-      try {
-        const endpoint = authMode === "login"
-          ? "/login"
-          : "/signup";
-
-        const res = await fetch(`${API_BASE}${endpoint}?email=${email}&password=${password}`, {
-          method: "POST"
-        });
-
-        const data = await res.json();
-
-        if (authMode === "signup") {
-          alert("Account created. Please login.");
-          openAuth("login");
-          return;
-        }
-
-        if (data.token) {
-          token = data.token;
-          localStorage.setItem("token", token);
-          closeAuth();
-          alert("Login successful");
-        } else {
-          alert(data.error || "Authentication failed");
-        }
-
-      } catch (err) {
-        console.error(err);
-        alert("Server error");
-      }
-    }
-
-    // ============================
-    // SEARCH
-    // ============================
 
     async function runSearch() {
-
-      if (!token) {
-        openAuth("login");
-        return;
-      }
-
-      const query = document.getElementById("query").value;
-      const location = document.getElementById("location").value;
-
-      if (!query) {
-        alert("Enter search query");
-        return;
-      }
-
-      document.getElementById("loader").classList.remove("hidden");
-      document.getElementById("results").innerHTML = "";
-
-      try {
-
-        const res = await fetch(`${API_BASE}/search`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-          },
-          body: JSON.stringify({ query, location })
-        });
-
-        const data = await res.json();
-
-        document.getElementById("loader").classList.add("hidden");
-
-        if (data.error) {
-          alert(data.error);
-          return;
-        }
-
-        renderResults(data);
-
-      } catch (err) {
-        console.error(err);
-        document.getElementById("loader").classList.add("hidden");
-        alert("Failed to fetch results");
-      }
+      document.getElementById("loader").classList.add("hidden");
+      document.getElementById("results").textContent =
+        "Intelligence search is unavailable while its backend service is being configured.";
     }
 
     // ============================
