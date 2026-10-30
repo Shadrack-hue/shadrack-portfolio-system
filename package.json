@@ -4,7 +4,10 @@
   "description": "Portfolio website for Eng. Shadrack Favour",
   "type": "module",
   "scripts": {
-    "build": "echo 'Static site - no build needed'"
+    "build": "node scripts/build.mjs",
+    "dev": "npm run build && node scripts/dev.mjs",
+    "test": "node --test tests/*.test.js",
+    "check": "node --check assets/intelstream.js && node --check api/search.js && node --check lib/search.js"
   },
   "keywords": [
     "portfolio",
@@ -13,6 +16,7 @@
   "author": "Shadrack Favour",
   "license": "MIT",
   "dependencies": {
-    "@vercel/speed-insights": "^1.0.0"
+    "@vercel/speed-insights": "^1.0.0",
+    "fast-xml-parser": "5.11.2"
   }
 }

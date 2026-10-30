@@ -1,487 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IntelStream AI | Eng. Shadrack Favour</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    * {
-      font-family: 'Inter', sans-serif;
-    }
-
-    body {
-      background: #050816;
-      color: white;
-      overflow-x: hidden;
-    }
-
-    .glass {
-      background: rgba(255,255,255,0.06);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .glow {
-      box-shadow: 0 0 30px rgba(59,130,246,0.35);
-    }
-
-    .gradient-text {
-      background: linear-gradient(90deg,#60a5fa,#8b5cf6,#06b6d4);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .loader {
-      width: 40px;
-      height: 40px;
-      border: 4px solid rgba(255,255,255,0.2);
-      border-top-color: #60a5fa;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    .card-hover {
-      transition: all .3s ease;
-    }
-
-    .card-hover:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 25px rgba(59,130,246,0.3);
-    }
-  </style>
-  
-  <!-- Vercel Speed Insights -->
-  <script>
-    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
-  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore knowledge, news, and technology discussions with IntelStream. Search, filter, save sources, and export your research.">
+  <meta name="theme-color" content="#070b16">
+  <title>IntelStream AI | Shadrack Favour</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23070b16'/%3E%3Cpath d='M20 16h9v32h-9zm15 0h9v32h-9z' fill='%237ba7ff'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/assets/intelstream.css">
+  <script type="module" src="/assets/intelstream.js"></script>
+  <script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments)};window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
-  <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
+  <a class="skip-link" href="#search-form">Skip to search</a>
+  <div class="shell">
+    <header class="site-header">
+      <a class="brand" href="/intelstream.html" aria-label="IntelStream home"><span class="brand-icon" aria-hidden="true">ıı</span><span>IntelStream <small>AI</small></span></a>
+      <nav aria-label="Main navigation">
+        <a href="/index.html">← Portfolio</a>
+        <button id="saved-nav" class="button subtle" type="button">Saved <span id="saved-count">0</span></button>
+        <a class="button primary" href="#search-form">Start exploring <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
 
-  <div class="min-h-screen p-6 lg:p-10">
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <p class="eyebrow"><span class="status-dot"></span> Your open research workspace</p>
+        <h1 id="hero-title">Follow your curiosity.<br><span>Connect the evidence.</span></h1>
+        <p class="hero-copy">Explore knowledge, news, and community discussions in one place.<br class="desktop-only"> Find the source. Save what matters. Build your next idea.</p>
+      </section>
 
-    <!-- NAV -->
-    <nav class="flex justify-between items-center mb-12">
-      <div>
-        <h1 class="text-3xl font-extrabold gradient-text">IntelStream AI</h1>
-        <p class="text-gray-400 text-sm">Built by Eng. Shadrack | AI & Electrical Engineer</p>
-      </div>
+      <section class="search-panel" aria-label="Search workspace">
+        <form id="search-form" role="search">
+          <div class="query-field"><label for="query">What are you researching?</label><input id="query" name="q" type="search" placeholder="Try solar energy, embedded AI, or Arsenal…" minlength="2" maxlength="160" required autocomplete="off"></div>
+          <div class="location-field"><label for="location">Location <span>(optional)</span></label><input id="location" name="location" placeholder="e.g. Kenya" maxlength="80" type="text"></div>
+          <button id="search-button" class="button primary search-button" type="submit"><span aria-hidden="true">⌕</span> Analyze</button>
+          <button id="cancel-button" class="button subtle" type="button" hidden>Cancel</button>
+        </form>
+        <div class="search-bottom"><div class="suggestions"><span>Explore</span><button type="button" data-query="solar energy" data-location="Kenya">Solar in Kenya ↗</button><button type="button" data-query="embedded AI">Embedded AI ↗</button><button type="button" data-query="Arsenal">Arsenal ↗</button></div><span class="quiet">No account needed</span></div>
+        <p class="location-help">Location adds a keyword to your search. Results use source relevance; they are not AI-generated answers.</p>
+      </section>
 
-      <div class="flex gap-3">
-        <!-- New Link Button Added Here -->
-        <a href="index.html" target="_self" class="px-5 py-2 rounded-xl glass hover:bg-white/10 transition flex items-center gap-2 text-blue-400 border border-blue-500/30 font-semibold">
-          ← Back to Portfolio
-        </a>
-
-        <button onclick="openAuth('login')"
-          class="px-5 py-2 rounded-xl glass hover:bg-white/10 transition hidden md:block">
-          Login
-        </button>
-
-        <button onclick="openAuth('signup')"
-          class="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 transition glow hidden md:block">
-          Get Started
-        </button>
-      </div>
-    </nav>
-
-    <!-- HERO -->
-    <section class="max-w-5xl mx-auto text-center mb-14">
-      <h2 class="text-5xl lg:text-7xl font-black leading-tight mb-6">
-        AI-Powered
-        <span class="gradient-text">Intelligence Search</span>
-      </h2>
-
-      <p class="text-gray-400 text-lg max-w-3xl mx-auto leading-relaxed">
-        Aggregate web intelligence, news, social signals, geo-context and AI-ranked results in one ultra-fast platform engineered by Eng. Shadrack Favour.
-      </p>
-    </section>
-
-    <!-- SEARCH -->
-    <section class="max-w-6xl mx-auto mb-10">
-      <div class="glass rounded-3xl p-6 lg:p-8 glow">
-
-        <div class="grid lg:grid-cols-4 gap-4">
-          <input
-            id="query"
-            type="text"
-            placeholder="Search intelligence..."
-            class="lg:col-span-2 p-4 rounded-2xl bg-black/30 border border-white/10 outline-none"
-          />
-
-          <input
-            id="location"
-            type="text"
-            placeholder="Location (optional)"
-            class="p-4 rounded-2xl bg-black/30 border border-white/10 outline-none"
-          />
-
-          <button
-            onclick="runSearch()"
-            class="bg-blue-600 hover:bg-blue-500 rounded-2xl font-bold text-lg transition glow">
-            Analyze
-          </button>
-        </div>
-
-        <div class="flex flex-wrap gap-3 mt-6">
-          <div class="glass px-4 py-2 rounded-xl text-sm">AI Ranking</div>
-          <div class="glass px-4 py-2 rounded-xl text-sm">News Intelligence</div>
-          <div class="glass px-4 py-2 rounded-xl text-sm">Social Signals</div>
-          <div class="glass px-4 py-2 rounded-xl text-sm">Geo Context</div>
-          <div class="glass px-4 py-2 rounded-xl text-sm">Image Extraction(s)</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- STATS -->
-    <section class="max-w-6xl mx-auto grid md:grid-cols-3 gap-5 mb-12">
-      <div class="glass rounded-3xl p-6 card-hover">
-        <h3 class="text-4xl font-black mb-2">24/7</h3>
-        <p class="text-gray-400">Real-time intelligence collection</p>
-      </div>
-
-      <div class="glass rounded-3xl p-6 card-hover">
-        <h3 class="text-4xl font-black mb-2">AI</h3>
-        <p class="text-gray-400">Semantic ranking engine</p>
-      </div>
-
-      <div class="glass rounded-3xl p-6 card-hover">
-        <h3 class="text-4xl font-black mb-2">Global</h3>
-        <p class="text-gray-400">Location-aware intelligence mapping</p>
-      </div>
-    </section>
-
-    <!-- FOUNDER -->
-    <section class="max-w-6xl mx-auto mb-14">
-      <div class="glass rounded-3xl p-8 lg:p-10 card-hover">
-        <div class="grid lg:grid-cols-2 gap-8 items-center">
-
-          <div>
-            <h2 class="text-4xl font-black mb-4 gradient-text">
-              About the Founder
-            </h2>
-
-            <p class="text-gray-300 leading-relaxed text-lg mb-6">
-              Eng. Shadrack Favour is an Electrical Engineer and AI Systems Builder focused on developing intelligent digital infrastructures, scalable SaaS products, and real-time data intelligence systems.
-            </p>
-
-            <div class="space-y-3 text-gray-300">
-              <p><strong>Email:</strong> shadracfavour44@gmail.com</p>
-              <p><strong>Phone:</strong> +254 741 443 643</p>
-              <p><strong><a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
-    <i class="fab fa-linkedin-in"></i>
-  </a>LinkedIn:</strong> <a href="https://www.linkedin.com/in/shadrack-favour-80b284289" target="_blank" class="text-blue-400 hover:underline">www.linkedin.com/in/shadrack-favour-80b284289</a></p>
-              <p><strong><a href="https://instagram.com" target="_blank" aria-label="Instagram">
-    <i class="fab fa-instagram"></i>
-  </a>Instagram:</strong> <a href="https://www.instagram.com/shadrack_favor/" target="_blank" class="text-blue-400 hover:underline">https://www.instagram.com/shadrack_favor/</a></p>
-              <p><strong><a href="https://facebook.com" target="_blank" aria-label="Facebook">
-    <i class="fab fa-facebook-f"></i>
-  </a>Facebook:</strong> <a href="https://www.facebook.com/ShadrackFavour254/" target="_blank" class="text-blue-400 hover:underline">https://www.facebook.com/ShadrackFavour254/</a></p>
-            </div>
+      <section id="workspace" class="workspace" aria-labelledby="workspace-title">
+        <div class="workspace-heading"><div><p class="eyebrow" id="view-label">Research desk</p><h2 id="workspace-title" tabindex="-1">Discover your next connection</h2></div><button id="export-button" class="button subtle" type="button" disabled>↓ Export results</button></div>
+        <div class="toolbar">
+          <div class="filters" role="group" aria-label="Filter results">
+            <button type="button" data-filter="all" aria-pressed="true">All <span>0</span></button>
+            <button type="button" data-filter="knowledge" aria-pressed="false">Knowledge <span>0</span></button>
+            <button type="button" data-filter="news" aria-pressed="false">News <span>0</span></button>
+            <button type="button" data-filter="discussions" aria-pressed="false">Discussions <span>0</span></button>
           </div>
-
-          <div class="glass rounded-3xl p-8 border border-white/10">
-            <h3 class="text-2xl font-bold mb-6">Core Expertise</h3>
-
-            <div class="grid grid-cols-2 gap-4">
-              <div class="bg-black/30 p-4 rounded-2xl">AI Engineering</div>
-              <div class="bg-black/30 p-4 rounded-2xl">FastAPI Systems</div>
-              <div class="bg-black/30 p-4 rounded-2xl">Automation</div>
-              <div class="bg-black/30 p-4 rounded-2xl">MongoDB Atlas</div>
-              <div class="bg-black/30 p-4 rounded-2xl">Electrical Engineering</div>
-              <div class="bg-black/30 p-4 rounded-2xl">SaaS Architecture</div>
-            </div>
-          </div>
-
+          <div class="sort-controls"><label class="checkbox-label"><input id="images-only" type="checkbox"> With images</label><label class="sr-only" for="sort">Sort results</label><select id="sort"><option value="relevance">Relevance</option><option value="newest">Newest first</option></select></div>
         </div>
-      </div>
-    </section>
+        <div class="view-actions"><button id="back-results" class="text-button" type="button" hidden>← Back to search results</button><p id="saved-note" class="quiet" hidden>Saved on this browser only. Use Export to keep a copy.</p></div>
+        <p id="status" class="status" role="status" aria-live="polite">Search a topic to bring your sources together.</p>
+        <div id="source-status" class="source-status" aria-label="Search source availability"></div>
+        <div id="loader" class="loading" hidden><span class="spinner" aria-hidden="true"></span><span>Searching knowledge, news, and discussions…</span></div>
+        <div id="error" class="error" role="alert" hidden><p id="error-message"></p><button id="retry-button" class="button subtle" type="button">Try again</button></div>
+        <div id="results" class="results" aria-busy="false"></div>
+        <div id="empty-state" class="empty-state"><span class="empty-icon" aria-hidden="true">⌕</span><h3 id="empty-title">A good question is a great start.</h3><p id="empty-copy">Search across Wikipedia, Google News, and Hacker News. Your results will appear here with links to the original sources.</p></div>
+        <button id="more-button" class="button subtle more-button" type="button" hidden>Show more results</button>
+      </section>
 
-    <!-- LOADER -->
-    <div id="loader" class="hidden justify-center my-10">
-      <div class="loader"></div>
-    </div>
+      <section class="about" aria-labelledby="about-title"><div><p class="eyebrow">Built with curiosity. Grounded in engineering.</p><h2 id="about-title">Shadrack Favour</h2><p class="professional-title">Electrical &amp; Software Systems Engineer</p><p>Exploring the intersection of software, automation, and intelligent systems. IntelStream brings useful sources into a focused research workspace.</p><div class="about-links"><a href="https://shadrackfavour.vercel.app" target="_blank" rel="noopener noreferrer">Professional portfolio ↗</a><a href="https://www.linkedin.com/in/shadrack-favour-bsc-80b284289/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="mailto:shadracfavour44@gmail.com">Email ↗</a></div></div><div class="source-note"><h3>Know your sources</h3><p><strong>Knowledge</strong> — Wikipedia background and article images.</p><p><strong>News</strong> — publisher coverage indexed by Google News.</p><p><strong>Discussions</strong> — technology stories and community context from Hacker News.</p><p class="quiet">Coverage varies by topic. Check the original source and publication date before drawing conclusions. Search results may be cached for up to five minutes.</p></div></section>
 
-    <!-- RESULTS -->
-    <section class="max-w-7xl mx-auto">
-      <div id="results" class="grid md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
-    </section>
-
+      <section class="contact-panel" aria-labelledby="contact-title"><div><p class="eyebrow">Have an idea?</p><h2 id="contact-title">Let’s build something useful.</h2><p>Questions, feedback, or a project in mind? Send Shadrack a message.</p></div><form id="contact-form" action="https://formspree.io/f/mqejbpgw" method="POST"><div class="contact-row"><div><label for="contact-name">Your name</label><input id="contact-name" name="name" required maxlength="100" autocomplete="name"></div><div><label for="contact-email">Email address</label><input id="contact-email" name="email" type="email" required maxlength="254" autocomplete="email"></div></div><label for="contact-message">Message</label><textarea id="contact-message" name="message" rows="4" required maxlength="5000"></textarea><input class="honeypot" name="_gotcha" type="text" tabindex="-1" autocomplete="off" aria-hidden="true"><button id="contact-submit" class="button primary" type="submit">Send message ↗</button><p id="contact-status" role="status" aria-live="polite"></p><p class="quiet">Your message is sent through Formspree.</p></form></section>
+    </main>
+    <footer><span>IntelStream AI · Built by Shadrack Favour</span><a href="#search-form">Back to search ↑</a></footer>
   </div>
-
-<!-- START: Formspree contact block (fs-shadrack) -->
-<section id="fs-shadrack-contact" aria-labelledby="fs-shadrack-title">
-<style>
-  /* Scoped Formspree styles for #fs-shadrack-contact */
-  :root {
-    --fs-bg: #ffffff;
-    --fs-accent: #0b5fff;
-    --fs-accent-600: #084bd6;
-    --fs-border: #e6e9ee;
-    --fs-text: #111827;
-    --fs-muted: #6b7280;
-    --fs-radius: 10px;
-    --fs-shadow: 0 6px 18px rgba(11,95,255,0.06);
-  }
-
-  /* Container */
-  #fs-shadrack-contact {
-    max-width: 760px;
-    margin: 36px auto;
-    padding: 22px;
-    border-radius: var(--fs-radius);
-    background: var(--fs-bg);
-    box-shadow: var(--fs-shadow);
-    color: var(--fs-text);
-    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    line-height: 1.45;
-  }
-
-  /* Heading */
-  #fs-shadrack-contact h2 {
-    margin: 0 0 14px;
-    font-size: 1.35rem;
-    letter-spacing: -0.01em;
-  }
-
-  /* Grid row */
-  .fs-shadrack-row {
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-  }
-
-  .fs-shadrack-field {
-    flex: 1 1 240px;
-    min-width: 180px;
-  }
-
-  .fs-shadrack-field label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: var(--fs-text);
-    font-size: 0.95rem;
-  }
-
-  /* Inputs and textarea */
-  .fs-shadrack-field input,
-  .fs-shadrack-field textarea {
-    width: 100%;
-    padding: 12px 14px;
-    border: 1px solid var(--fs-border);
-    border-radius: 8px;
-    background: transparent;
-    color: inherit;
-    font-size: 0.95rem;
-    transition: box-shadow 160ms ease, border-color 160ms ease, transform 120ms ease;
-    box-sizing: border-box;
-  }
-
-  .fs-shadrack-field textarea { min-height: 140px; resize: vertical; }
-
-  /* Focus states for accessibility */
-  .fs-shadrack-field input:focus,
-  .fs-shadrack-field textarea:focus {
-    outline: none;
-    border-color: var(--fs-accent);
-    box-shadow: 0 6px 18px rgba(11,95,255,0.08);
-    transform: translateY(-1px);
-  }
-
-  /* Submit area */
-fs-accent-500) 0%,
-    var(--fs-accent-700) 100%
-  );
-  
-.fs-shadrack-submit {
-  margin-top: 2rem;
-  text-align: center;
-}
-
-.fs-shadrack-submit button {
-  background: linear-gradient(135deg, #0f172a, #2563eb);
-  color: #fff;
-  border: none;
-  padding: 14px 34px;
-  border-radius: 14px;
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
-  transition: all 0.35s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.fs-shadrack-submit button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -120%;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.18);
-  transform: skewX(-25deg);
-  transition: 0.6s;
-}
-
-.fs-shadrack-submit button:hover::before {
-  left: 120%;
-}
-
-.fs-shadrack-submit button:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 14px 32px rgba(37, 99, 235, 0.4);
-  background: linear-gradient(135deg, #1e293b, #3b82f6);
-}
-
-.fs-shadrack-submit button:active {
-  transform: scale(0.98);
-}
-
-.fs-shadrack-note {
-  margin-top: 0.85rem;
-  font-size: 0.92rem;
-  color: #64748b;
-  font-weight: 500;
-  letter-spacing: 0.3px;
-  animation: fadeUp 1s ease;
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-</style>
-  
-  <h2 id="fs-shadrack-title"><strong>Contact</strong></h2>
-
-  <form action="https://formspree.io/f/mqejbpgw" method="POST" class="fs-shadrack-form" novalidate>
-    <div class="fs-shadrack-row">
-      <div class="fs-shadrack-field">
-        <label for="fs-shadrack-name">Your Name</label>
-        <input id="fs-shadrack-name" name="name" type="text" required autocomplete="name" />
-      </div>
-
-      <div class="fs-shadrack-field">
-        <label for="fs-shadrack-email">Email</label>
-        <input id="fs-shadrack-email" name="email" type="email" required autocomplete="email" />
-      </div>
-    </div>
-
-    <div class="fs-shadrack-field" style="margin-top:12px;">
-      <label for="fs-shadrack-message">Message</label>
-      <textarea id="fs-shadrack-message" name="message" rows="6" required></textarea>
-    </div>
-
-    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-    <input type="hidden" name="_next" value="https://shadrackweb.netlify.app/thanks.html">
-
-    <div class="fs-shadrack-submit">
-      <button type="submit">Send message</button>
-      <div class="fs-shadrack-note">We’ll reply within 24 hours.</div>
-    </div>
-  </form>
-</section>
-<!-- END: Formspree contact block (fs-shadrack) -->
-
-    </div>
-  </div>
-
-  <script>
-
-    // Authentication and search are unavailable until a verified service is connected.
-    // Do not collect credentials or send requests to the former placeholder backend.
-    function openAuth() {
-      alert("Sign-in is unavailable while the account service is being configured.");
-    }
-
-    async function runSearch() {
-      document.getElementById("loader").classList.add("hidden");
-      document.getElementById("results").textContent =
-        "Intelligence search is unavailable while its backend service is being configured.";
-    }
-
-    // ============================
-    // RENDER RESULTS
-    // ============================
-
-    function renderResults(results) {
-
-      const container = document.getElementById("results");
-
-      if (!results.length) {
-        container.innerHTML = `
-          <div class="glass rounded-3xl p-10 text-center col-span-full">
-            <h2 class="text-2xl font-bold mb-3">No Results Found</h2>
-            <p class="text-gray-400">Try another intelligence query.</p>
-          </div>
-        `;
-        return;
-      }
-
-      container.innerHTML = results.map(r => `
-
-        <div class="glass rounded-3xl overflow-hidden card-hover">
-
-          ${r.images && r.images[0]
-            ? `<img src="${r.images[0]}" class="w-full h-56 object-cover">`
-            : `<div class="h-56 bg-gradient-to-br from-blue-600 to-purple-700 flex items-center justify-center text-6xl font-black">AI</div>`
-          }
-
-          <div class="p-6">
-
-            <div class="flex justify-between items-center mb-4">
-              <span class="text-xs uppercase tracking-widest text-blue-400 font-bold">
-                ${r.source || 'web'}
-              </span>
-
-              ${r.location
-                ? `<span class="text-xs text-gray-400">
-                    ${r.location.lat.toFixed(2)}, ${r.location.lon.toFixed(2)}
-                  </span>`
-                : ''
-              }
-            </div>
-
-            <h2 class="text-xl font-bold mb-4 leading-snug line-clamp-3">
-              ${r.title}
-            </h2>
-
-            <a
-              href="${r.link}"
-              target="_blank"
-              class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 px-5 py-3 rounded-xl font-semibold transition">
-              Open Source
-            </a>
-
-          </div>
-        </div>
-
-      `).join('');
-    }
-
-  </script>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <noscript><p class="error">Enable JavaScript to use search, bookmarks, and exports. The contact form and portfolio links still work.</p></noscript>
 </body>
 </html>
