@@ -18,5 +18,8 @@
   "dependencies": {
     "@vercel/speed-insights": "^1.0.0",
     "fast-xml-parser": "5.11.2"
+  },
+  "devDependencies": {
+    "jsdom": "30.1.3"
   }
 }
